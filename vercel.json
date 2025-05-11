@@ -1,8 +1,15 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/get-involved/internship"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/src/app/$1"
     }
-  ]
+  ],
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "cleanUrls": true
 }
