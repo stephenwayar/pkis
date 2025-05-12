@@ -1,50 +1,63 @@
 "use client"
-import { Icon } from "@iconify/react/dist/iconify.js"
+import Image from "next/image";
 import { useRef, useState, useEffect } from "react"
+import { Icon } from "@iconify/react/dist/iconify.js"
+import testimonial1 from "@/assets/svgs/user-testimonial.svg"
 
 export default function PastInternsCarousel() {
+  const isScrollingRef = useRef(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
-  const realOpportunities = [
+  const realTestimonials = [
     {
-      title: "Digital Services",
-      description: "Interns get to work in digital content management, database services & digital marketing.",
+      author: "-John Doe",
+      position: "Business Development Specialist at Google",
+      quote: "Interning at SCEF was a transformative experience. The hands-on projects and guidance from industry experts helped me develop my skills and boosted my confidence. I now have a clear career path and invaluable connections.",
+      image: testimonial1
     },
     {
-      title: "Administration and policy",
-      description: "Interns get Opportunities in the administrative support, policy research, and strategy implementation.",
+      author: "-John Doe",
+      position: "Business Development Specialist at Google",
+      quote: "Interning at SCEF was a transformative experience. The hands-on projects and guidance from industry experts helped me develop my skills and boosted my confidence. I now have a clear career path and invaluable connections.",
+      image: testimonial1
     },
     {
-      title: "Project Managment",
-      description: "Interns get to work in planning, executing and monitoring SCEF's educational projects.",
+      author: "-John Doe",
+      position: "Business Development Specialist at Google",
+      quote: "Interning at SCEF was a transformative experience. The hands-on projects and guidance from industry experts helped me develop my skills and boosted my confidence. I now have a clear career path and invaluable connections.",
+      image: testimonial1
     },
     {
-      title: "Research and Evaluation",
-      description: "Interns get to work in research and evaluation of educational programs and policies.",
+      author: "-John Doe",
+      position: "Business Development Specialist at Google",
+      quote: "Interning at SCEF was a transformative experience. The hands-on projects and guidance from industry experts helped me develop my skills and boosted my confidence. I now have a clear career path and invaluable connections.",
+      image: testimonial1
     },
     {
-      title: "Capacity Building",
-      description: "Interns get to work in capacity building of SCEF staff and partners.",
+      author: "-John Doe",
+      position: "Business Development Specialist at Google",
+      quote: "Interning at SCEF was a transformative experience. The hands-on projects and guidance from industry experts helped me develop my skills and boosted my confidence. I now have a clear career path and invaluable connections.",
+      image: testimonial1
     },
   ];
 
   // Add cloned first and last item for looping
-  const opportunities = [
-    realOpportunities[realOpportunities.length - 1], // clone of last
-    ...realOpportunities,
-    realOpportunities[0], // clone of first
+  const testimonials = [
+    realTestimonials[realTestimonials.length - 1], // clone of last
+    ...realTestimonials,
+    realTestimonials[0], // clone of first
   ];
 
-  const cardWidth = 400 + 16; // width + margin
+  const cardHeight = 500; // height of each testimonial card
 
   // Set up initial scroll and listeners
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (scrollContainer) {
-      scrollContainer.scrollLeft = cardWidth;
+      scrollContainer.scrollTop = cardHeight;
       setActiveIndex(0);
       checkScroll();
       scrollContainer.addEventListener('scroll', checkScroll);
@@ -57,44 +70,57 @@ export default function PastInternsCarousel() {
     };
   }, []);
 
-
   // Scroll logic + loop handling
   const checkScroll = () => {
     const scrollContainer = scrollContainerRef.current;
     if (scrollContainer) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
-      const index = Math.round(scrollLeft / cardWidth);
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+      const index = Math.round(scrollTop / cardHeight);
 
       // Loop jump conditions
       if (index === 0) {
-        scrollContainer.scrollLeft = cardWidth * realOpportunities.length;
-        setActiveIndex(realOpportunities.length - 1);
+        scrollContainer.scrollTop = cardHeight * realTestimonials.length;
+        setActiveIndex(realTestimonials.length - 1);
         return;
       }
-      if (index === opportunities.length - 1) {
-        scrollContainer.scrollLeft = cardWidth;
+      if (index === testimonials.length - 1) {
+        scrollContainer.scrollTop = cardHeight;
         setActiveIndex(0);
         return;
       }
 
       setActiveIndex(index - 1); // adjust for prepended clone
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+      setCanScrollLeft(scrollTop > 0);
+      setCanScrollRight(scrollTop < scrollHeight - clientHeight - 1);
     }
   };
 
   const handleScrollLeft = () => {
+    if (isScrollingRef.current) return;
+    isScrollingRef.current = true;
+
     scrollContainerRef.current?.scrollBy({
-      left: -cardWidth,
+      top: -cardHeight,
       behavior: 'smooth',
     });
+
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 500);
   };
 
   const handleScrollRight = () => {
+    if (isScrollingRef.current) return;
+    isScrollingRef.current = true;
+
     scrollContainerRef.current?.scrollBy({
-      left: cardWidth,
+      top: cardHeight,
       behavior: 'smooth',
     });
+
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 500);
   };
 
   return (
@@ -102,23 +128,39 @@ export default function PastInternsCarousel() {
       {/* Carousel */}
       <div className="flex items-start space-x-10">
         <div ref={scrollContainerRef} className="overflow-y-scroll no-scrollbar w-full">
-          <div className="flex flex-col space-y-4 items-end h-[500px] w-full">
-            {opportunities.map((opp, index) => (
-              <div
-                key={index}
-                // style={{ backgroundImage: "url('/assets/imgs/nternship-card.png')" }}
-                className="p-5 flex items-center justify-between space-x-6 bg-no-repeat max-w-[80rem] w-full min-h-[500px] bg-[#F8F9FF] object-center object-cover"
-              >
-                <div>
+          <div className="flex flex-col items-end h-[500px] w-full">
+            {testimonials.map((testimonial, index) => (
+              <div className="overflow-x-scroll min-h-[500px] max-w-[80rem] w-full no-scrollbar" key={index}>
+                <div
+                  style={{ backgroundImage: "url('/assets/imgs/Testimonals.jpg')" }}
+                  className="p-8 flex items-center justify-between space-x-6 bg-no-repeat bg-cover bg-center border-y-2 border-[#4672DA] max-w-[80rem] min-w-[80rem] min-h-[500px] bg-[#F8F9FF] object-center object-cover"
+                >
+                  <div>
+                    <div className="w-[415px] h-[415px]">
+                      <Image
+                        priority
+                        alt="logo icon"
+                        className="w-full h-full"
+                        src={testimonial.image}
+                      />
+                    </div>
+                  </div>
 
-                </div>
+                  <div className="space-y-10 text-[#40493E]">
+                    <p className="text-3xl">
+                      {testimonial.quote}
+                    </p>
 
-                <div className="space-y-3 text-white">
-                  <p className="text-3xl font-semibold">
-                    {opp.title}
-                  </p>
+                    <div className="space-y-2 text-lg">
+                      <p>
+                        {testimonial.author}
+                      </p>
 
-                  <p>{opp.description}</p>
+                      <p>
+                        {testimonial.position}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -127,7 +169,7 @@ export default function PastInternsCarousel() {
 
         {/* Indicator */}
         <div className="flex flex-col justify-center items-center gap-y-3 mt-8">
-          {realOpportunities.map((_, idx) => (
+          {realTestimonials.map((_, idx) => (
             <div
               key={idx}
               className={
