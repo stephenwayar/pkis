@@ -1,14 +1,24 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import Nav from "@/components/nav/Nav";
 
 export const metadata: Metadata = {
   title: "Internship Opportunities | Santos Creations Educational Foundation",
-  description: "Join SCEF as an intern and contribute to bridging educational gaps across Africa",
+  description: "Join SCEF as an intern and contribute to bridging educational gaps across Africa. Apply for internship opportunities today.",
+  openGraph: {
+    title: "Internship Opportunities | Santos Creations Educational Foundation",
+    description: "Join SCEF as an intern and contribute to bridging educational gaps across Africa. Apply for internship opportunities today.",
+    url: "https://pkis-stephenwayars-projects.vercel.app/get-involved/internship",
+  },
+  twitter: {
+    title: "Internship Opportunities | Santos Creations Educational Foundation",
+    description: "Join SCEF as an intern and contribute to bridging educational gaps across Africa. Apply for internship opportunities today.",
+  },
 };
 
-export default function Internship() {
+export default function InternshipPage() {
   return (
     <div>
-      <h1>Internship Opportunities</h1>
+      <Nav />
     </div>
   );
 }
