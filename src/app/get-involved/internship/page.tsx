@@ -6,6 +6,7 @@ import StepsToIntern from "@/components/promotions/StepsToIntern";
 import BecomeAnIntern from "@/components/promotions/BecomeAnIntern"
 import AvailableInternships from "@/components/promotions/AvailableInternships";
 import InternshipOppurtunities from "@/components/promotions/InternshipOppurtunities";
+import Footer from "@/components/nav/Footer";
 
 export const metadata: Metadata = {
   title: "Internship Opportunities | Santos Creations Educational Foundation",
@@ -37,6 +38,8 @@ export default function InternshipPage() {
       <StepsToIntern />
 
       <BecomeAnIntern />
+
+      <Footer />
     </div>
   );
 }
