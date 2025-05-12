@@ -2,7 +2,7 @@
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { useRef, useState, useEffect } from "react"
 
-export default function AvailableInternshipsCarousel() {
+export default function PastInternsCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -98,9 +98,50 @@ export default function AvailableInternshipsCarousel() {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 mt-10">
+      {/* Carousel */}
+      <div className="flex items-start space-x-10">
+        <div ref={scrollContainerRef} className="overflow-y-scroll no-scrollbar w-full">
+          <div className="flex flex-col space-y-4 items-end h-[500px] w-full">
+            {opportunities.map((opp, index) => (
+              <div
+                key={index}
+                // style={{ backgroundImage: "url('/assets/imgs/nternship-card.png')" }}
+                className="p-5 flex items-center justify-between space-x-6 bg-no-repeat max-w-[80rem] w-full min-h-[500px] bg-[#F8F9FF] object-center object-cover"
+              >
+                <div>
+
+                </div>
+
+                <div className="space-y-3 text-white">
+                  <p className="text-3xl font-semibold">
+                    {opp.title}
+                  </p>
+
+                  <p>{opp.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Indicator */}
+        <div className="flex flex-col justify-center items-center gap-y-3 mt-8">
+          {realOpportunities.map((_, idx) => (
+            <div
+              key={idx}
+              className={
+                idx === activeIndex
+                  ? "w-4 h-10 rounded-full bg-[#3366CC] transition-all duration-300"
+                  : "w-4 h-4 rounded-full bg-gray-200 transition-all duration-300"
+              }
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Scroll Controls */}
-      <div className="flex justify-end space-x-3">
+      <div className="flex justify-center space-x-3">
         <button
           onClick={handleScrollLeft}
           className={`border-2 h-[48px] w-[48px] flex items-center justify-center rounded-full ${canScrollLeft ? 'border-[#3366CC]' : 'border-[#6E7B6B]'}`}
@@ -124,40 +165,6 @@ export default function AvailableInternshipsCarousel() {
             icon="iconamoon:arrow-right-2-duotone"
           />
         </button>
-      </div>
-
-      {/* Carousel */}
-      <div className="relative">
-        <div ref={scrollContainerRef} className="overflow-x-scroll no-scrollbar w-full">
-          <div className="flex space-x-4 w-full">
-            {opportunities.map((opp, index) => (
-              <div
-                key={index}
-                style={{ backgroundImage: "url('/assets/imgs/internship-card.png')" }}
-                className="min-w-[400px] py-24 flex flex-col rounded-[20px] bg-no-repeat bg-cover bg-center justify-end h-[500px] p-5"
-              >
-                <div className="space-y-3 text-white">
-                  <h3 className="text-3xl font-semibold">{opp.title}</h3>
-                  <p>{opp.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Indicator */}
-        <div className="flex justify-center items-center gap-3 mt-8">
-          {realOpportunities.map((_, idx) => (
-            <div
-              key={idx}
-              className={
-                idx === activeIndex
-                  ? "w-10 h-4 rounded-full bg-[#3366CC] transition-all duration-300"
-                  : "w-4 h-4 rounded-full bg-gray-200 transition-all duration-300"
-              }
-            />
-          ))}
-        </div>
       </div>
     </div>
   )

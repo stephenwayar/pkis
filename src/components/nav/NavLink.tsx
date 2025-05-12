@@ -45,7 +45,7 @@ export default function NavLink({ link }: { link: INavLink }) {
               <div className="w-full" key={index}>
                 <Link
                   href={child.href as string}
-                  className="text-[#5F5F5F] text-sm block w-full p-2 hover:bg-gray-100"
+                  className="text-[#5F5F5F] rounded-md text-sm block w-full p-2 hover:bg-gray-100"
                 >
                   {child.label}
                 </Link>
