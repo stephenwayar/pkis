@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/nav/Nav";
 import WhyIntern from "@/components/promotions/WhyIntern";
 import PastInterns from "@/components/promotions/PastInterns";
+import StepsToIntern from "@/components/promotions/StepsToIntern";
 import AvailableInternships from "@/components/promotions/AvailableInternships";
 import InternshipOppurtunities from "@/components/promotions/InternshipOppurtunities";
 
@@ -31,6 +32,8 @@ export default function InternshipPage() {
       <AvailableInternships />
 
       <PastInterns />
+
+      <StepsToIntern />
     </div>
   );
 }
