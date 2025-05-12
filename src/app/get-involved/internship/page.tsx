@@ -3,6 +3,7 @@ import Nav from "@/components/nav/Nav";
 import WhyIntern from "@/components/promotions/WhyIntern";
 import PastInterns from "@/components/promotions/PastInterns";
 import StepsToIntern from "@/components/promotions/StepsToIntern";
+import BecomeAnIntern from "@/components/promotions/BecomeAnIntern"
 import AvailableInternships from "@/components/promotions/AvailableInternships";
 import InternshipOppurtunities from "@/components/promotions/InternshipOppurtunities";
 
@@ -34,6 +35,8 @@ export default function InternshipPage() {
       <PastInterns />
 
       <StepsToIntern />
+
+      <BecomeAnIntern />
     </div>
   );
 }
