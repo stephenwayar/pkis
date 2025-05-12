@@ -78,7 +78,7 @@ export default function Nav() {
   const toggle = () => setOpened(!opened);
 
   return (
-    <div className="sticky z-10 top-0 bg-white">
+    <div className="sticky z-100 top-0 bg-white">
       <MaxWidthLayout>
         <div className="flex h-[90px] items-center justify-between">
           <div className="flex items-center space-x-8">

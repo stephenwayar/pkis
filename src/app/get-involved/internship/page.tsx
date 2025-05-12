@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/nav/Nav";
 import WhyIntern from "@/components/promotions/WhyIntern";
 import InternshipOppurtunities from "@/components/promotions/InternshipOppurtunities";
+import AvailableInternships from "@/components/promotions/AvailableInternships";
 
 export const metadata: Metadata = {
   title: "Internship Opportunities | Santos Creations Educational Foundation",
@@ -25,6 +26,8 @@ export default function InternshipPage() {
       <InternshipOppurtunities />
 
       <WhyIntern />
+
+      <AvailableInternships />
     </div>
   );
 }
