@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Nav from "@/components/nav/Nav";
-
+import InternshipOppurtunities from "@/components/promotions/InternshipOppurtunities";
 export const metadata: Metadata = {
   title: "Internship Opportunities | Santos Creations Educational Foundation",
   description: "Join SCEF as an intern and contribute to bridging educational gaps across Africa. Apply for internship opportunities today.",
@@ -19,6 +19,8 @@ export default function InternshipPage() {
   return (
     <div>
       <Nav />
+
+      <InternshipOppurtunities />
     </div>
   );
 }
